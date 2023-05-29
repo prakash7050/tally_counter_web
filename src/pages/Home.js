@@ -1,12 +1,15 @@
 import { useState } from "react";
 import TallCounter from "./TallyCounter";
 import { Grid } from "@mui/material";
+import { logout } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 
 const defaultValue = {name:'Tally Counter',value:0}
 
 const Home = () =>{
     const [data,setData] = useState([defaultValue])
+    const navigate = useNavigate()
 
     const close = (i) =>{
         let list = [...data]
@@ -40,14 +43,16 @@ const Home = () =>{
         setData([...list])
     }
 
+    const userLogout = async() =>{
+        await logout()
+        navigate('/login')
+    }
+
     return(
         <>
             <div style={{width:'100%',height:25,display:'flex'}}>
                 <div style={{paddingLeft:10,width:'50%'}}>
-                    Email
-                </div>
-                <div style={{width:'50%'}}>
-                    Logout
+                <button style={{backgroundColor:'red',padding:5}}  onClick={()=>userLogout()}>Logout</button>
                 </div>
             </div>
             <hr style={{borderTop: '1px dotted red'}}></hr>

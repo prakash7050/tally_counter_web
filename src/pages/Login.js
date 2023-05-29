@@ -15,9 +15,14 @@ const Login = () =>{
         }else if(!password){
             return alert('Please Enter pasword')
         }else{
-            await logInWithEmailAndPassword(email,password)
-            navigate('/home')
-            alert('Login Successfully !')
+            try{
+                const result = await logInWithEmailAndPassword(email,password)
+                navigate('/home')
+                alert('Login Successfully !')
+            }
+            catch(err){
+                console.log(`<<error<<<<<<`,err)
+            }
         }
     }
 
